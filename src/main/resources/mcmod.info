@@ -1,7 +1,7 @@
 [
 {
-  "modid": "modid",
-  "name": "isXander's  Mod",
+  "modid": "capetest",
+  "name": "isXander's Cape Test",
   "description": "",
   "version": "${version}",
   "mcversion": "${mcversion}",
