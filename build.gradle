@@ -26,7 +26,8 @@ minecraft {
 }
 
 dependencies {
-
+    provided files("libs/modcore.jar")
+    provided files("libs/xanderlib.jar")
 }
 
 processResources {
@@ -41,5 +42,13 @@ processResources {
 
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
+    }
+}
+
+jar {
+    manifest {
+        attributes "FMLCorePlugin": "co.uk.isxander.capetest.forge.FMLLoadingPlugin",
+                "ModSide": "CLIENT",
+                "FMLCorePluginContainsFMLMod": "Yes, yes it does"
     }
 }
