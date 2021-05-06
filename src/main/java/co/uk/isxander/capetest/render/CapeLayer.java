@@ -1,5 +1,6 @@
 package co.uk.isxander.capetest.render;
 
+import co.uk.isxander.capetest.CapeTest;
 import co.uk.isxander.xanderlib.utils.Constants;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -26,8 +27,7 @@ public class CapeLayer implements LayerRenderer<AbstractClientPlayer>, Constants
 
     @Override
     public void doRenderLayer(AbstractClientPlayer entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-        if (!SimpleCapes.getSettings().isCapeSet()) return;
-        if (!SimpleCapes.getSettings().isEnabled()) return;
+        if (!CapeTest.getInstance().getConfig().enabled) return;
         UUID playerUUID = mc.getSession().getProfile().getId();
         if (!entity.getPersistentID().equals(playerUUID)) return;
         if (!entity.isInvisible() && entity.isWearing(EnumPlayerModelParts.CAPE)) {
@@ -39,7 +39,7 @@ public class CapeLayer implements LayerRenderer<AbstractClientPlayer>, Constants
             }
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             try {
-                this.playerRenderer.bindTexture(CapeDownloader.DOWNLOADER.getCachedTexture());
+                this.playerRenderer.bindTexture(CapeTest.getInstance().getPlayerCache().getPlayerData(entity.getUniqueID()).getCapeLocation());
             } catch (NullPointerException ignored) {
             }
             GlStateManager.pushMatrix();
